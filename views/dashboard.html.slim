@@ -7,6 +7,8 @@ html
     link rel='stylesheet' href='/stylesheets/dashboard.css'
     link rel='stylesheet' href='/stylesheets/jenkins.css'
     link rel='stylesheet' href='/stylesheets/jira.css'
+    link rel='stylesheet' href='/stylesheets/open_jiras.css'
+    link rel='stylesheet' href='/stylesheets/closed_jiras.css'
 
     script type='text/javascript' src='/vendor/jquery.js'
     script type='text/javascript' src='/vendor/underscore.js'
@@ -15,8 +17,25 @@ html
     script type='text/javascript' src='/javascripts/app.js'
     script type='text/javascript' src='/javascripts/jenkins.js'
     script type='text/javascript' src='/javascripts/jira.js'
+    script type='text/javascript' src='/javascripts/open_jiras.js'
+    script type='text/javascript' src='/javascripts/closed_jiras.js'
 
   body
+
+    #graphs
+      #open_jiras_graph
+        #open_graph.graph
+        span Recently Opened JIRAs:
+        span#recentOpen
+        br
+        span Total apollo JIRAs Open:
+        span#totalOpen
+
+      #closed_jiras_graph
+        #closed_graph.graph
+        span JIRAs Closed:
+        span#numClosed
+
     #jenkins
       #jobs
 
@@ -33,15 +52,16 @@ html
               .message {{message}}
 
     #jira
-      #issues
+      #issues1
+      #issues2
 
-        script id='issue-template' type='text/html'
-          a(href="{{url}}" target='_blank')
-            section class="{{issueType}}"
-              .left
-                .key {{key}}
-                .assignee {{assignee}}
-                .create_time class="{{age}}" {{create_time}}
-              .right
-                .summary {{summary}}
-                .issueType
+      script id='issue-template' type='text/html'
+        a(href="{{url}}" target='_blank')
+          section class="{{issueType}} jira"
+            .left
+              .key {{key}}
+              .assignee {{assignee}}
+              .create_time class="{{age}}" {{create_time}}
+            .right
+              .summary {{summary}}
+              .issueType

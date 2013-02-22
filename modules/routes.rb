@@ -22,3 +22,21 @@ get '/issues/amount/:amount' do
     content.json { fetch_jiras(params[:amount].to_i).to_json }
   end
 end
+
+get '/open_jiras' do
+  respond_to do |content|
+    content.json { fetch_open_jiras().to_json }
+  end
+end
+
+get '/all_open_jiras' do
+  respond_to do |content|
+    content.json { fetch_all_open_jiras().to_json }
+  end
+end
+
+get '/closed_jiras' do
+  respond_to do |content|
+    content.json { fetch_closed_jiras().to_json }
+  end
+end

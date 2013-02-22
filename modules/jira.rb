@@ -1,12 +1,13 @@
 require 'active_support/all'
+require_relative 'open_jiras'
 
 def login()
-  @jira_service ||= JIRA::JIRAService.new(config[:jira][:url])
+  $jira_service ||= JIRA::JIRAService.new(config[:jira][:url])
 
-  if (@jira_service.auth_token.nil?)
+  if ($jira_service.auth_token.nil?)
     name = config[:jira][:login]
     pswd = config[:jira][:password]
-    @jira_service.login name, pswd
+    $jira_service.login name, pswd
   end
 end
 
@@ -15,7 +16,7 @@ def fetch_jiras(amount)
 
   jql = 'project = RFI AND labels = "q&e" AND resolution = Unresolved ORDER BY priority DESC, created ASC'
 
-  @jira_service.issues_from_jql_search(jql, amount.to_i).map do |jira|
+  $jira_service.issues_from_jql_search(jql, amount.to_i).map do |jira|
     {
         :key => jira.key,
         :assignee => jira.assignee_username,

@@ -10,7 +10,7 @@ class App.Jobs extends Backbone.Collection
   model: App.Job
 
   amount: =>
-    Math.ceil($(window).outerHeight() / 100)
+    Math.floor($(window).outerHeight() / 50) - 1
 
   keepFetching: =>
     $.get "/jobs/amount/#{@amount()}.json", (jobs) =>
